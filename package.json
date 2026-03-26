@@ -1,0 +1,12 @@
+{
+  "name": "actuator",
+  "version": "1.0.0",
+  "description": "Connector for all repos - writes and edits files across repositories.",
+  "main": "sync-repos.js",
+  "scripts": {
+    "start": "node sync-repos.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.0.0"
+  }
+}
