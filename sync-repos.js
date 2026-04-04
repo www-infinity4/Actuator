@@ -37,7 +37,13 @@ const lovePage = process.env.LOVE_PAGE;
 async function main() {
   if (lovePage) {
     // Love page mode: write the full love page HTML to index.html at the root of each target repo
-    const loveHtml = fs.readFileSync(path.join(__dirname, "love.html"), "utf8");
+    let loveHtml;
+    try {
+      loveHtml = fs.readFileSync(path.join(__dirname, "love.html"), "utf8");
+    } catch (err) {
+      console.error("Failed to read love.html:", err.message);
+      process.exit(1);
+    }
     console.log("Syncing love page (index.html) to all target repos...");
     for (const repo of repos) {
       await writeToRepo(owner, repo.trim(), "index.html", "Serve love page to root", loveHtml);

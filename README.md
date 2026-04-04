@@ -7,7 +7,7 @@ Actuator can serve a full HTML love page (`index.html`) to the root of all targe
 
 ### Setup
 
-1. Set the `LOVE_PAGE` repository variable to any non-empty value (e.g. `true`) in GitHub (Settings → Variables → Actions).
+1. Set the `LOVE_PAGE` repository variable to a non-empty string value (e.g. `true`) in GitHub (Settings → Variables → Actions). Note: any non-empty string enables this mode — including the literal string `"false"`. Leave the variable unset or empty to disable it.
 2. Ensure `GH_PAT` and `TARGET_REPOS` secrets are configured (see below).
 
 ### How it works
