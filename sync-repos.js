@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const { Octokit } = require("@octokit/rest");
 const { fetchYouTubeMetadata, formatVideoContent } = require("./youtube-source");
 
@@ -30,9 +32,17 @@ async function writeToRepo(owner, repo, path, message, content) {
 const owner = process.env.GITHUB_REPOSITORY_OWNER || "your-username";
 const repos = (process.env.TARGET_REPOS || "repo-a,repo-b,repo-c").split(",");
 const youtubeUrl = process.env.YOUTUBE_URL;
+const lovePage = process.env.LOVE_PAGE;
 
 async function main() {
-  if (youtubeUrl) {
+  if (lovePage) {
+    // Love page mode: write the full love page HTML to index.html at the root of each target repo
+    const loveHtml = fs.readFileSync(path.join(__dirname, "love.html"), "utf8");
+    console.log("Syncing love page (index.html) to all target repos...");
+    for (const repo of repos) {
+      await writeToRepo(owner, repo.trim(), "index.html", "Serve love page to root", loveHtml);
+    }
+  } else if (youtubeUrl) {
     // YouTube source mode: fetch video metadata and sync to all target repos
     console.log(`Fetching YouTube metadata for: ${youtubeUrl}`);
     let metadata;

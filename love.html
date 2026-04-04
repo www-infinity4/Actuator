@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love &hearts;</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a0010 0%, #3d0020 50%, #1a0010 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* Floating hearts background */
+    .hearts-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .heart-float {
+      position: absolute;
+      bottom: -60px;
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(0.8); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    }
+
+    /* Main card */
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 100, 130, 0.3);
+      border-radius: 2rem;
+      padding: 3rem 3.5rem;
+      max-width: 520px;
+      width: 90%;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 60px rgba(255, 50, 100, 0.25), 0 8px 32px rgba(0,0,0,0.4);
+      animation: cardIn 1s ease both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Big pulsing heart */
+    .big-heart {
+      font-size: 5rem;
+      display: inline-block;
+      animation: heartbeat 1.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 16px rgba(255, 80, 120, 0.8));
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    @keyframes heartbeat {
+      0%   { transform: scale(1); }
+      14%  { transform: scale(1.15); }
+      28%  { transform: scale(1); }
+      42%  { transform: scale(1.1); }
+      70%  { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff6b8a, #ff9eb5, #ff6b8a);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+      margin-bottom: 0.5rem;
+    }
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    .tagline {
+      font-size: 1.05rem;
+      color: rgba(255, 200, 220, 0.85);
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .message {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: rgba(255, 230, 240, 0.9);
+      margin-bottom: 2rem;
+    }
+
+    .hearts-row {
+      font-size: 1.6rem;
+      letter-spacing: 0.3rem;
+      margin-bottom: 2rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.6; }
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff4d7d, #ff8fa3);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.45rem 1.2rem;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 14px rgba(255, 77, 125, 0.5);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 1rem;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255, 180, 200, 0.45);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts background -->
+  <div class="hearts-bg" id="heartsContainer"></div>
+
+  <!-- Main card -->
+  <div class="card">
+    <div class="big-heart">&#x2764;&#xFE0F;</div>
+    <h1>Love &amp; Light</h1>
+    <p class="tagline">Delivered with care by Actuator &hearts;</p>
+    <p class="message">
+      Every connection matters.<br />
+      Every commit is a gesture of love.<br />
+      Thank you for being here — you make this world brighter.
+    </p>
+    <div class="hearts-row">&#x1F497; &#x1F496; &#x2764;&#xFE0F; &#x1F496; &#x1F497;</div>
+    <span class="badge">Synced with &hearts; by Actuator</span>
+  </div>
+
+  <footer>Actuator &mdash; spreading love across repositories</footer>
+
+  <script>
+    // Spawn floating hearts with varied positions and speeds
+    const container = document.getElementById('heartsContainer');
+    const symbols = ['&#x2764;', '&#x1F497;', '&#x1F496;', '&#x1F48C;', '&#x1F495;'];
+    const count = 22;
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('span');
+      el.className = 'heart-float';
+      el.innerHTML = symbols[i % symbols.length];
+      const left = Math.random() * 100;
+      const duration = 6 + Math.random() * 10;
+      const delay = Math.random() * 12;
+      const size = 1 + Math.random() * 1.5;
+      el.style.cssText = `left:${left}%;font-size:${size}rem;animation-duration:${duration}s;animation-delay:${delay}s;`;
+      container.appendChild(el);
+    }
+  </script>
+</body>
+</html>

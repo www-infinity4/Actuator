@@ -1,6 +1,19 @@
 # Actuator
 Connector for all repos and writes, edits into files.
 
+## Love Page
+
+Actuator can serve a full HTML love page (`index.html`) to the root of all target repositories.
+
+### Setup
+
+1. Set the `LOVE_PAGE` repository variable to any non-empty value (e.g. `true`) in GitHub (Settings → Variables → Actions).
+2. Ensure `GH_PAT` and `TARGET_REPOS` secrets are configured (see below).
+
+### How it works
+
+When `LOVE_PAGE` is set, `sync-repos.js` reads `love.html` from this repository and writes it as `index.html` to the root of every target repository. This makes the love page available at the GitHub Pages URL (or any host serving that repo's root) for each target repo.
+
 ## YouTube Source
 
 Actuator can fetch a YouTube video's metadata and sync it as a Markdown file (`sources/youtube-video.md`) into all target repositories.

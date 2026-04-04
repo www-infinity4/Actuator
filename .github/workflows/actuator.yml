@@ -20,4 +20,5 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
           TARGET_REPOS: ${{ secrets.TARGET_REPOS }}
           YOUTUBE_URL: ${{ vars.YOUTUBE_URL }}
+          LOVE_PAGE: ${{ vars.LOVE_PAGE }}
         run: node sync-repos.js
